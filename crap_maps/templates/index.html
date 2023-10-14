@@ -1,17 +1,63 @@
 {% load socialaccount %}
+{% load static %}
+
+<!DOCTYPE html>
 <html>
-<body>
-<h1>My Google OAuth Project </h1>
-{% if user.is_authenticated %}
-  <p>Welcome {{ user.first_name }} {{ user.last_name }}. Your username is {{ user.username }}</p>
-  {% if user.groups.all.0.name == 'admin' %}
-    <p>You are an admin.</p>
-  {% else %}
-    <p>You are not an admin.</p>
-  {% endif %}
-<a href="logout">Logout</a>
-{% else %}
-  <a href="{% provider_login_url 'google' %}">Login With Google</a>
-{% endif %}
-</body>
+  <head>
+    <title>Simple Marker</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3OnveqjA5MDZSG3FlJe2LmJ1VoGatB1c&callback=initMap&libraries=&v=weekly" defer></script>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #gmp-map {
+        height: 100%;
+      }
+
+      /* Optional: Makes the sample page fill the window. */
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <script>
+      "use strict";
+
+      function initMap() {
+        const myLatLng = {
+          lat: 38.0317497253418,
+          lng: -78.51103973388672
+        };
+        const map = new google.maps.Map(document.getElementById("gmp-map"), {
+          zoom: 14,
+          center: myLatLng,
+          fullscreenControl: false,
+          zoomControl: true,
+          streetViewControl: false
+        });
+        new google.maps.Marker({
+          position: myLatLng,
+          map,
+          title: "My location"
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="gmp-map"></div>
+    <h1>My Google OAuth Project </h1>
+    {% if user.is_authenticated %}
+      <p>Welcome {{ user.first_name }} {{ user.last_name }}. Your username is {{ user.username }}</p>
+      {% if user.groups.all.0.name == 'admin' %}
+        <p>You are an admin.</p>
+      {% else %}
+        <p>You are not an admin.</p>
+      {% endif %}
+    <a href="logout">Logout</a>
+    {% else %}
+      <a href="{% provider_login_url 'google' %}">Login With Google</a>
+    {% endif %}
+  </body>
 </html>
