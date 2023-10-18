@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import dj_database_url
 import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -159,3 +160,9 @@ SITE_ID = 2
 
 LOGIN_REDIRECT_URL = '/crap_maps/'
 LOGOUT_REDIRECT_URL = '/crap_maps/'
+
+env = environ.Env()
+environ.Env.read_env('.env')
+GOOGLE_MAPS_API_KEY = env.str('GOOGLE_MAPS_API_KEY', default='')
+if not GOOGLE_MAPS_API_KEY and 'GOOGLE_MAPS_API_KEY' in os.environ:
+    GOOGLE_MAPS_API_KEY = os.environ['GOOGLE_MAPS_API_KEY']
