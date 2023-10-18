@@ -3,8 +3,9 @@
 
 <!DOCTYPE html>
 <html>
+  {% if user.is_authenticated %}
   <head>
-    <title>Simple Marker</title>
+    <title>Crap Maps</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap&libraries=&v=weekly" defer></script>
     <style>
@@ -77,6 +78,7 @@
       }
     </script>
   </head>
+  {% endif %}
   <body>
     <div id="gmp-map"></div>
     <h1>My Google OAuth Project </h1>
