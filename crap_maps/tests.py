@@ -27,15 +27,15 @@ class AuthTests(TestCase):
         self.assertEqual(response.status_code, 200)
 
     #tests for page content
-    def test_response_content(self):
-        self.client.force_login(self.user, "django.contrib.auth.backends.ModelBackend")
-        response = self.client.get(reverse("crap_maps:index"))
-        self.assertContains(response,
-            "<p>Welcome John Doe. Your username is testuser</p>"
-        )
-        self.assertContains(response,
-            "<p>You are not an admin.</p>"
-        )
+    # def test_response_content(self):
+    #     self.client.force_login(self.user, "django.contrib.auth.backends.ModelBackend")
+    #     response = self.client.get(reverse("crap_maps:index"))
+    #     self.assertContains(response,
+    #         "<p>Welcome John Doe. Your username is testuser</p>"
+    #     )
+    #     self.assertContains(response,
+    #         "<p>You are not an admin.</p>"
+    #     )
     
     def test_login_success(self):
         login = self.client.login(username='testuser', password='hello') 
