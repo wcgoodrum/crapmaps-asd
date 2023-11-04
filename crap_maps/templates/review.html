@@ -1,33 +1,179 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Submit a Bathroom Review</title>
-</head>
-<body>
-    <h1>Submit a Review for Bathroom Name</h1>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Navbar</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+            /* Add your CSS styles here */
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+    
+            li, a, button {
+                font-family: "Montserrat", sans-serif;
+                font-weight: 500;
+                font-size: 16px;
+                color: #edf0f1;
+                text-decoration: none;
+            }
+    
+            header {
+                background-color: #24252A;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 30px 10%;
+            }
 
-    <form action="{% url 'review' %}" method="post">
-        {% csrf_token %}
-        <label for="bathroom">Choose a Bathroom:</label>
-        <select id="bathroom" name="bathroom">
-        {% for bath in bathrooms %}
-            <option value="{{ bath.id }}">{{ bath.name }}</option>
-        {% endfor %}
-        </select>
+            .logo{
+                font-family: "Montserrat", sans-serif;
+                color: #edf0f1;
+                font-size: 20px;
+                cursor: pointer;
+                order: 3;
+                margin-left: auto;
+            }
 
-        <br>
+            nav {
+                order: 1;
+            }
 
-        <label for="rating">Rating (1-10):</label>
-        <input type="number" id="rating" name="rating" min="1" max="10" required>
-        
-        <br>
+            .nav_links {
+                list-style: none;
+            }
 
-        <label for="review">Review:</label>
-        <textarea id="review" name="review" rows="4" cols="50"></textarea>
-        
-        <br>
+            .nav_links li {
+                display: inline-block;
+                padding: 0px 20px;
+            }
 
-        <input type="submit" value="Submit Review">
-    </form>
-</body>
+            .nav_links li:nth-child(1){
+                padding: 0 20px 0 0;
+            }
+
+            .nav_links li a{
+                transition: all 0.3s ease 0s;
+            }
+
+            .nav_links li a:hover {
+                color: #0088a9;
+            }
+
+            .cta {
+                order: 2;
+            }
+
+            button {
+                margin-left: 20px;
+                padding: 9px 25px;
+                background-color: rgba(0, 136, 169, 1);
+                border: none;
+                border-radius: 50px;
+                cursor: pointer;
+                transition: all 0.3s ease 0s;
+            }
+            
+            button:hover{
+                background-color: rgba(0, 136, 169, 0.8);
+            }
+
+            .content-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center; /* This will center the content horizontally */
+                justify-content: center; /* This will center the content vertically if the container has a set height */
+                margin-top: 50px; /* Adds some space at the top */
+            }
+
+            .form-container {
+                width: 100%;
+                max-width: 600px; /* Maximum width of the form */
+                margin: 0 auto; /* This will center the form in the middle of the page */
+                padding: 20px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow around the form */
+            }
+
+            .form-group {
+                margin-bottom: 20px; /* Adds space between form groups */
+            }
+
+            label {
+            display: block; /* Makes the label take up the full width */
+            margin-bottom: 5px; /* Adds some space between the label and the input */
+            }
+
+            input[type="number"],
+            textarea {
+                width: 100%; /* Makes inputs and textarea take up the full width of their container */
+                padding: 10px;
+                margin-bottom: 10px; /* Adds some space below inputs and textarea */
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            input[type="submit"] {
+                background-color: #0088a9;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-size: 16px;
+            }
+
+            input[type="submit"]:hover {
+                background-color: #007b94;
+            }
+
+
+        </style>
+    </head>
+    <body>
+        <header>
+            <div class="logo">GoogleCrapMap</div>
+            <nav>
+                <ul class = "nav_links">
+                    <li><a href="{% url 'crap_maps:index' %}">Home</a></li>
+                    <li><a href="{% url 'crap_maps:map' %}">Map</a></li>
+                    <li><a href="{% url 'crap_maps:review' %}">Review</a></li>
+                </ul>
+            </nav>
+            <!-- a class = "cta" href = "#"><button>Contact</button></a-->
+        </header>
+
+        <div class="content-container">
+            <div class="form-container">
+                <h1>Submit a Review for Bathroom Name</h1>
+                <br>
+                <form action="{% url 'crap_maps:review' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="bathroom">Choose a Bathroom:</label>
+                        <select id="bathroom" name="bathroom">
+                            {% for bath in bathrooms %}
+                                <option value="{{ bath.id }}">{{ bath.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="rating">Rating (1-10):</label>
+                        <input type="number" id="rating" name="rating" min="1" max="10" required>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="review">Review:</label>
+                        <textarea id="review" name="review" rows="4" cols="50"></textarea>
+                    </div>
+    
+                    <input type="submit" value="Submit Review">
+                </form>
+            </div>
+        </div>
+    </body>
 </html>
