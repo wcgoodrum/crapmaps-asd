@@ -5,7 +5,6 @@ from .views import map_view
 
 from . import views
 
-app_name="crap_maps"
 urlpatterns = [
     # path("", views.index, name="index"),
     path('', TemplateView.as_view(template_name="index.html"), name="index"),
