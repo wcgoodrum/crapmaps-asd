@@ -12,3 +12,6 @@ class ReviewForm(forms.Form):
     
     Review = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+    
+    approved_status = forms.BooleanField(default=False)
+    

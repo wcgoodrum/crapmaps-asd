@@ -1,0 +1,20 @@
+<h2>Unapproved Reviews</h2>
+
+<body>
+    <ol>
+        {% for review in unapproved_reviews %}
+            <li>
+                Review ID: {{ review.id }}<br>
+                Bathroom: {{ review.bathroom }}
+                <form action="{% url 'approve_view' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="review_id" value="{{ review.id }}">
+                    <button type="submit" name="action" value="approve">Approve</button>
+                    <button type="submit" name="action" value="deny">Deny</button>
+                </form>
+            </li>
+        {% empty %}
+            <p>No unapproved reviews.</p>
+        {% endfor %}
+    </ol>
+</body>
