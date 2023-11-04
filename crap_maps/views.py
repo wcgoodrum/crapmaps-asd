@@ -32,3 +32,25 @@ def review_view(request):
     bathrooms = Bathroom.objects.all()
     context = {'bathrooms': bathrooms}
     return render(request, 'review.html', context)
+
+def approve_view(request):
+    if request.method == 'POST':
+        review_id = request.POST.get('review_id')
+        action = request.POST.get('action')
+
+        print(review_id)
+        print(action)
+
+        if action == 'approve':
+            review = Review.objects.get(pk=review_id)
+            review.approved_status = True
+            review.save()
+        elif action == 'deny':
+            review = Review.objects.get(pk=review_id)
+            review.delete()
+
+    unapproved_reviews = Review.objects.filter(approved_status=0)
+    context = {'unapproved_reviews': unapproved_reviews}
+    return render(request, 'approve.html', context)
+        
+    

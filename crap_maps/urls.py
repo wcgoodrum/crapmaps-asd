@@ -12,5 +12,6 @@ urlpatterns = [
     path('logout', LogoutView.as_view()),
     path('map/', map_view, name='map'),
     path('review/', review_view, name='review'), 
-    path('review/success/', TemplateView.as_view(template_name="success.html"))
+    path('review/success/', TemplateView.as_view(template_name="success.html")),
+    path('approve/', views.approve_view, name='approve_view')
 ]
