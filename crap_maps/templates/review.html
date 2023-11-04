@@ -138,9 +138,9 @@
             <div class="logo">GoogleCrapMap</div>
             <nav>
                 <ul class = "nav_links">
-                    <li><a href="{% url 'crap_maps:index' %}">Home</a></li>
-                    <li><a href="{% url 'crap_maps:map' %}">Map</a></li>
-                    <li><a href="{% url 'crap_maps:review' %}">Review</a></li>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'map' %}">Map</a></li>
+                    <li><a href="{% url 'review' %}">Review</a></li>
                 </ul>
             </nav>
             <!-- a class = "cta" href = "#"><button>Contact</button></a-->
@@ -150,7 +150,7 @@
             <div class="form-container">
                 <h1>Submit a Review for Bathroom Name</h1>
                 <br>
-                <form action="{% url 'crap_maps:review' %}" method="post">
+                <form action="{% url 'review' %}" method="post">
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="bathroom">Choose a Bathroom:</label>
