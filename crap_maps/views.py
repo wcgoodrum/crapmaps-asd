@@ -11,7 +11,8 @@ def success(request):
 
 def map_view(request):
     bathrooms = Bathroom.objects.all()
-    context = {'bathrooms': bathrooms}
+    reviews = Review.objects.filter(approved_status=True)
+    context = {'bathrooms': bathrooms, 'reviews' : reviews}
     return render(request, 'map.html', context)
 
 def review_view(request):
