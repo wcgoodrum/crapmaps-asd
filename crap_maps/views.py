@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from .models import Bathroom, Review
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test, login_required
 
 def index(request):
     return HttpResponse("Hello, world. You're at the crap_maps index.")
@@ -34,8 +34,12 @@ def review_view(request):
     context = {'bathrooms': bathrooms}
     return render(request, 'review.html', context)
 
-@user_passes_test(lambda u: u.is_superuser)
+@login_required
 def approve_view(request):
+
+    if not request.user.groups.filter(name='admin').exists():
+        return render(request, 'not_admin.html')
+
     if request.method == 'POST':
         review_id = request.POST.get('review_id')
         action = request.POST.get('action')
@@ -54,5 +58,3 @@ def approve_view(request):
     unapproved_reviews = Review.objects.filter(approved_status=0)
     context = {'unapproved_reviews': unapproved_reviews}
     return render(request, 'approve.html', context)
-        
-    
