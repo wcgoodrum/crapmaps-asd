@@ -23,7 +23,7 @@ class AuthTests(TestCase):
     #response code of 200 for default page
     def test_response_status(self):
         self.client.force_login(self.user, "django.contrib.auth.backends.ModelBackend")
-        response = self.client.get(reverse("crap_maps:index"))
+        response = self.client.get(reverse("index"))
         self.assertEqual(response.status_code, 200)
 
     #tests for page content
