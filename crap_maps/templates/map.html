@@ -93,14 +93,15 @@
 
       #bathroom-info {
           position: absolute;
-          top: 0;
+          top: 85px; /* Set top equal to the height of the header */
           left: 0;
           width: 300px;
           background-color: white;
           padding: 10px;
           z-index: 1;
-          height: 100%;
+          height: calc(100% - 80px); /* Calculate the height taking the header into account */
           display: none;
+          overflow: auto; /* Add scroll if the content is too long */
       }
 
     /* Optional: Makes the sample page fill the window. */
@@ -140,7 +141,7 @@
                 map,
                 title: "My location"
               });
-
+              
               {% for bathroom in bathrooms %}
                 var marker{{ forloop.counter }} = new google.maps.Marker({
                     position: {lat: {{ bathroom.latitude }}, lng: {{ bathroom.longitude }}},
@@ -197,6 +198,7 @@
               <li><a href="{% url 'index' %}">Home</a></li>
               <li><a href="{% url 'map' %}">Map</a></li>
               <li><a href="{% url 'review' %}">Review</a></li>
+              <li><a href="{% url 'approve_view' %}">Approve</a></li>
           </ul>
       </nav>
       <!-- a class = "cta" href = "#"><button>Contact</button></a-->
