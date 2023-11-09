@@ -149,7 +149,9 @@
 
         <div class="content-container">
             <div class="form-container">
-                <h1>Submit a Review for Bathroom Name</h1>
+                <h2>Submit a Review for Bathroom Name</h2>
+                <br>
+                <hr style="text-align: left; width: 70%; height: 3px; color: #ffa300; background-color: #ffa300; border: none;">
                 <br>
                 <form action="{% url 'review' %}" method="post">
                     {% csrf_token %}

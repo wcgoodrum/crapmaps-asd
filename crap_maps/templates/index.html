@@ -201,6 +201,8 @@
     <div class="centered-content">
       <h1>My Google OAuth Project</h1>
       <br>
+      <hr style="text-align: left; width: 25%; height: 3px; color: #ffa300; background-color: #ffa300; border: none;">
+      <br>
       {% if user.is_authenticated %}
         <p>Welcome{{ user.first_name }}{{ user.last_name }}. Your username is {{ user.username }}.</p>
         {% if user.groups.all.0.name == 'admin' %}
