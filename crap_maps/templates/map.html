@@ -27,12 +27,32 @@
           top:0;
           height:100%;
           width:298px;
-          background-color: #ffcd7d;
+          background-color: #fdd99d;
+      }
+
+      .title {
+          width:100%;
+          background-color:#222;
+          color:white;
+          font-size: xx-large;
+          padding: 15px 0;
+          margin-top:0;
+          text-align: center;
+      }
+
+      .review-pane {
+          margin: 8px;
+          padding: 5px;
+          height: calc(100% - 150px);
+          background-color:#eee;
+          overflow-x: hidden;
+          overflow-y: auto;
       }
 
 
       /* Optional: Makes the sample page fill the window. */
       html, body {
+          font-family: "Montserrat", sans-serif;
           height: 100%;
           margin: 0;
           padding: 0;
@@ -44,8 +64,12 @@
     <script>
       "use strict";
 
-
-
+      function redirectToReview() {
+        window.location.href = '/crap_maps/review/';
+      }
+      function redirectToLogout() {
+        window.location.href = '/crap_maps/logout/';
+      }
 
       function initMap() {
         if (navigator.geolocation) {
@@ -90,10 +114,9 @@
                 bathroomInfo.innerHTML = '<h3>{{ bathroom.name }}</h3>';
                 {% for review in reviews %}
                   {% if review.bathroom.id == bathroom.id %}
-                    bathroomInfo.innerHTML += '<p>{{review.rating}}/10: {{review.comment}} </p>';
+                    bathroomInfo.innerHTML += '<p>{{review.rating}}/5 stars: {{review.comment}} </p>';
                   {% endif %}
                 {% endfor %}
-                bathroomInfo.innerHTML += '<button type="button" onclick="redirectToReview()">Submit a Review</button>';
                 document.getElementById('bathroom-info').appendChild(bathroomInfo);
 
                 // Open the bathroom-info div
@@ -130,25 +153,34 @@
   <body>
 
     <div class="side-bar">
-        <div style="width:100%; background-color:gray; color:white; font-size: xx-large; padding: 15px 0;margin-top:0; text-align: center">UVA CrapMaps</div>
+        <div class="title">UVA CrapMaps</div>
 
-        <div>
+        <div style="margin-left:8px">
             {% if user.groups.all.0.name == 'admin' %}
                 <span>admin: </span>
             {% else %}
                 <span>user: </span>
             {% endif %}
             {{ user.username }}
-            <a href="logout" class="logout-button">Logout</a>
+
+            <button type="button" onclick="redirectToLogout()" style="padding:2px; ">Logout</button>
         </div>
 
         <div class="review-pane">
-            <div id="bathroom-info"></div>
+            <div id="bathroom-info">
+                <p style="text-align: center; padding: 100px 50px; color: #666;">
+                    Click on a bathroom to see its reviews
+                </p>
+            </div>
         </div>
+
+        <div style="text-align: center;">
+            <button type="button" onclick="redirectToReview()">Submit a Review!</button>
+        </div>
+
     </div>
 
     <div id="gmp-map">map loading...</div>
-
 
   </body>
 </html>
