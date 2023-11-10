@@ -44,6 +44,9 @@
     <script>
       "use strict";
 
+
+
+
       function initMap() {
         if (navigator.geolocation) {
           const options = {
@@ -84,8 +87,13 @@
 
                 // Create and append the bathroom information to the bathroom-info div
                 var bathroomInfo = document.createElement('div');
-                bathroomInfo.innerHTML = '<h3>{{ bathroom.name }}</h3><p>Add Reviews Stuff Here</p>';
-                bathroomInfo.innerHTML = '<button type="button"> Submit a Review </button>'
+                bathroomInfo.innerHTML = '<h3>{{ bathroom.name }}</h3>';
+                {% for review in reviews %}
+                  {% if review.bathroom.id == bathroom.id %}
+                    bathroomInfo.innerHTML += '<p>{{review.rating}}/10: {{review.comment}} </p>';
+                  {% endif %}
+                {% endfor %}
+                bathroomInfo.innerHTML += '<button type="button" onclick="redirectToReview()">Submit a Review</button>';
                 document.getElementById('bathroom-info').appendChild(bathroomInfo);
 
                 // Open the bathroom-info div
