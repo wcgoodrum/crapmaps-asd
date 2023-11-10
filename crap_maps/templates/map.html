@@ -9,39 +9,69 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap&libraries=&v=weekly" defer></script>
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-        #gmp-map {
-            height: 100%;
-            position: relative;
-            z-index: 0;
-        }
+      #gmp-map {
+          height: 100%;
+          margin-left: 300px;
+          background-color:#7dbcff;
+          text-align: center;
+          font-size: x-large;
+      }
 
-        #bathroom-info {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 300px;
-            background-color: white;
-            padding: 10px;
-            z-index: 1;
-            height: 100%;
-            display: none;
-        }
+      .side-bar {
+          position:fixed;
+          left:0;
+          top:0;
+          height:100%;
+          width:298px;
+          background-color: #fdd99d;
+      }
+
+      .title {
+          width:100%;
+          background-color:#222;
+          color:white;
+          font-size: xx-large;
+          padding: 15px 0;
+          margin-top:0;
+          text-align: center;
+      }
+
+      .review-pane {
+          margin: 8px;
+          padding: 5px;
+          height: calc(100% - 150px);
+          background-color:#eee;
+          overflow-x: hidden;
+          overflow-y: auto;
+      }
+
 
       /* Optional: Makes the sample page fill the window. */
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
+      html, body {
+          font-family: "Montserrat", sans-serif;
+          height: 100%;
+          margin: 0;
+          padding: 0;
+          background-color: gray;
+          box-sizing:border-box;
       }
+
     </style>
     <script>
       "use strict";
+
+
       function redirectToReview() {
         window.location.href = '/crap_maps/review/';
       }
+      function redirectToLogout() {
+        window.location.href = '/crap_maps/logout/';
+      }
+
       function initMap() {
         if (navigator.geolocation) {
           const options = {
@@ -85,10 +115,11 @@
                 bathroomInfo.innerHTML = '<h3>{{ bathroom.name }}</h3>';
                 {% for review in reviews %}
                   {% if review.bathroom.id == bathroom.id %}
-                    bathroomInfo.innerHTML += '<p>{{review.rating}}/10: {{review.comment}} </p>';
+
+                    bathroomInfo.innerHTML += '<p>{{review.rating}}/5 stars: {{review.comment}} </p>';
                   {% endif %}
                 {% endfor %}
-                bathroomInfo.innerHTML += '<button type="button" onclick="redirectToReview()">Submit a Review</button>';
+
                 document.getElementById('bathroom-info').appendChild(bathroomInfo);
 
                 // Open the bathroom-info div
@@ -123,7 +154,38 @@
   </head>
   {% endif %}
   <body>
-    <div id="gmp-map"></div>
-    <div id="bathroom-info"></div>
+
+    <div class="side-bar">
+        <div class="title">UVA CrapMaps</div>
+
+        <div style="margin-left:8px">
+            {% if user.groups.all.0.name == 'admin' %}
+                <span>admin: </span>
+            {% else %}
+                <span>user: </span>
+            {% endif %}
+            {{ user.username }}
+
+            <button type="button" onclick="redirectToLogout()" style="padding:2px; ">Logout</button>
+        </div>
+
+        <div class="review-pane">
+            <div id="bathroom-info">
+                <p style="text-align: center; padding: 100px 50px; color: #666;">
+                    Click on a bathroom to see its reviews
+                </p>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <button type="button" onclick="redirectToReview()">Submit a Review!</button>
+        </div>
+
+    </div>
+
+    <div id="gmp-map">map loading...</div>
+
   </body>
 </html>
+
+
