@@ -53,7 +53,7 @@
           background-color: #4CAF50; /* Green */
           border: none;
           color: white;
-          padding: 15px 32px;
+          padding: 15px 30px;
           text-align: center;
           text-decoration: none;
           display: inline-block;
@@ -63,7 +63,7 @@
       }
 
       .side-bar .logout-button {
-          padding: 15px 32px;
+          padding: 10px 20px;
           background-color: #f44336;
           color: white;
           border: none;
@@ -83,6 +83,13 @@
           padding: 0;
           background-color: gray;
           box-sizing:border-box;
+      }
+
+      .user-admin-logout {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+          margin-left: 12px;
       }
 
     </style>
@@ -183,18 +190,17 @@
     <div class="side-bar">
         <div class="title">UVA CrapMaps</div>
 
-        <div style="margin-left:8px">
+        <div class="user-admin-logout">
             {% if user.groups.all.0.name == 'admin' %}
-                <span>admin: </span>
+                <span>Admin:&nbsp;</span>
             {% else %}
-                <span>user: </span>
+                <span>user:&nbsp;</span>
             {% endif %}
             {{ user.username }}
 
-            <button type="button" onclick="redirectToLogout()" class="logout-button">Logout</button>
-            <style>
-               
-            </style>
+            <div style="text-align: right; margin-left: 90px;">
+              <button type="button" onclick="redirectToLogout()" class="logout-button">Logout</button>
+            </div> 
         </div>
 
         <div class="review-pane">
@@ -205,7 +211,9 @@
             </div>
         </div>
         
-        <button type="button" onclick="redirectToReview()" class="review-button">Submit a Review!</button>
+        <div style="text-align: center;">
+          <button type="button" onclick="redirectToReview()" class="review-button">Submit a Review!</button>
+        </div>
 
     </div>
 
