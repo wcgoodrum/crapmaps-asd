@@ -43,13 +43,13 @@
       .review-pane {
           margin: 8px;
           padding: 5px;
-          height: calc(100% - 150px);
+          height: calc(100% - 200px);
           background-color:#eee;
           overflow-x: hidden;
           overflow-y: auto;
       }
 
-      .review-button {
+      .side-bar .review-button {
           background-color: #4CAF50; /* Green */
           border: none;
           color: white;
@@ -58,11 +58,11 @@
           text-decoration: none;
           display: inline-block;
           font-size: 16px;
-          margin: 4px 2px;
+          margin: 4px 20px;
           cursor: pointer;
       }
 
-      .logout-button {
+      .side-bar .logout-button {
           padding: 15px 32px;
           background-color: #f44336;
           color: white;
@@ -204,10 +204,8 @@
                 </p>
             </div>
         </div>
-  
-        <div style="text-align: center;">
-            <button type="button" onclick="redirectToReview()" class="review-button">Submit a Review!</button>
-        </div>
+        
+        <button type="button" onclick="redirectToReview()" class="review-button">Submit a Review!</button>
 
     </div>
 

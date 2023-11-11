@@ -136,7 +136,9 @@
                     <li><a href="{% url 'index' %}">Home</a></li>
                     <li><a href="{% url 'map' %}">Map</a></li>
                     <li><a href="{% url 'review' %}">Review</a></li>
-                    <li><a href="{% url 'approve_view' %}">Approve</a></li>
+                    {% if is_admin %}
+                        <li><a href="{% url 'approve_view' %}">Approve</a></li>
+                    {% endif %}
                 </ul>
             </nav>
             <!-- a class = "cta" href = "#"><button>Contact</button></a-->

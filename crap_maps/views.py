@@ -31,7 +31,7 @@ def review_view(request):
         return HttpResponseRedirect('success')
 
     bathrooms = Bathroom.objects.all()
-    context = {'bathrooms': bathrooms}
+    context = {'bathrooms': bathrooms, 'is_admin': request.user.groups.filter(name='admin').exists()}
     return render(request, 'review.html', context)
 
 @login_required
