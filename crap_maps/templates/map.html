@@ -49,6 +49,31 @@
           overflow-y: auto;
       }
 
+      .review-button {
+          background-color: #4CAF50; /* Green */
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+          cursor: pointer;
+      }
+
+      .logout-button {
+          padding: 15px 32px;
+          background-color: #f44336;
+          color: white;
+          border: none;
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+      }
 
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -116,7 +141,7 @@
                 {% for review in reviews %}
                   {% if review.bathroom.id == bathroom.id %}
 
-                    bathroomInfo.innerHTML += '<p>{{review.rating}}/5 stars: {{review.comment}} </p>';
+                    bathroomInfo.innerHTML += '<p>{{review.rating}}/10 stars: {{review.comment}} </p>';
                   {% endif %}
                 {% endfor %}
 
@@ -166,7 +191,10 @@
             {% endif %}
             {{ user.username }}
 
-            <button type="button" onclick="redirectToLogout()" style="padding:2px; ">Logout</button>
+            <button type="button" onclick="redirectToLogout()" class="logout-button">Logout</button>
+            <style>
+               
+            </style>
         </div>
 
         <div class="review-pane">
@@ -176,9 +204,9 @@
                 </p>
             </div>
         </div>
-
+  
         <div style="text-align: center;">
-            <button type="button" onclick="redirectToReview()">Submit a Review!</button>
+            <button type="button" onclick="redirectToReview()" class="review-button">Submit a Review!</button>
         </div>
 
     </div>
