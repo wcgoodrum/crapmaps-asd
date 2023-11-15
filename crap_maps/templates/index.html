@@ -43,7 +43,6 @@
 
       /* Optional: Makes the sample page fill the window. */
       html, body {
-        height: 100%;
         margin: 0;
         padding: 0;
         font-family: "Montserrat", sans-serif;
@@ -65,7 +64,11 @@
             <a href="{% url 'map' %}" class="map-button">Go to CrapMaps!</a>
 
             {% if user.groups.all.0.name == 'admin' %}
+                <br>
+                <br>
                 <div>admin tools:
+                    <br>
+                    <br>
                     <a href="{% url 'approve_view' %}">approve reviews</a>
                 </div>
             {% endif %}
