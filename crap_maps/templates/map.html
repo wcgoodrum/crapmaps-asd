@@ -13,6 +13,15 @@
 
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
+      html, body {
+          font-family: "Montserrat", sans-serif;
+          height: 100%;
+          margin: 0;
+          padding: 0;
+          background-color: gray;
+          {#box-sizing:border-box;#}
+      }
+
       #gmp-map {
           height: 100%;
           margin-left: 300px;
@@ -40,49 +49,45 @@
           text-align: center;
       }
 
+      .user-display {
+          float:left;
+          overflow-x:hidden;
+          margin: 8px 5px;
+          width: 205px;
+      }
+
+      .logout-button {
+          background-color: #f44336;
+          color: white;
+          font-size: 16px;
+          text-decoration: none;
+          border: none;
+          cursor: pointer;
+          margin: 4px 5px;
+          padding: 5px 12px;
+          float: right;
+      }
+
       .review-pane {
-          margin: 8px;
+          margin: 5px;
           padding: 5px;
-          height: calc(100% - 200px);
+          height: calc(100% - 170px);
           background-color:#eee;
           overflow-x: hidden;
           overflow-y: auto;
+          clear: both;
       }
 
-      .side-bar .review-button {
+      .review-button {
           background-color: #4CAF50; /* Green */
-          border: none;
           color: white;
-          padding: 15px 32px;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
           font-size: 16px;
-          margin: 4px 20px;
-          cursor: pointer;
-      }
-
-      .side-bar .logout-button {
-          padding: 15px 32px;
-          background-color: #f44336;
-          color: white;
+          text-decoration: none;
           border: none;
           cursor: pointer;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          font-size: 16px;
-          margin: 4px 2px;
-      }
-
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-          font-family: "Montserrat", sans-serif;
-          height: 100%;
-          margin: 0;
-          padding: 0;
-          background-color: gray;
-          box-sizing:border-box;
+          margin-top: 3px;
+          margin-left: 68px;
+          padding: 10px 20px;
       }
 
     </style>
@@ -183,19 +188,16 @@
     <div class="side-bar">
         <div class="title">UVA CrapMaps</div>
 
-        <div style="margin-left:8px">
+        <div class="user-display">
             {% if user.groups.all.0.name == 'admin' %}
-                <span>admin: </span>
+                <span>Admin:&nbsp;</span>
             {% else %}
-                <span>user: </span>
+                <span>user:&nbsp;</span>
             {% endif %}
             {{ user.username }}
-
-            <button type="button" onclick="redirectToLogout()" class="logout-button">Logout</button>
-            <style>
-               
-            </style>
         </div>
+
+        <button type="button" onclick="redirectToLogout()" class="logout-button">Logout</button>
 
         <div class="review-pane">
             <div id="bathroom-info">
@@ -204,9 +206,8 @@
                 </p>
             </div>
         </div>
-        
-        <button type="button" onclick="redirectToReview()" class="review-button">Submit a Review!</button>
 
+        <button type="button" onclick="redirectToReview()" class="review-button">Submit a Review!</button>
     </div>
 
     <div id="gmp-map">map loading...</div>

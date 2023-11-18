@@ -7,7 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
-             Add your CSS styles here
+            @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
             * {
                 box-sizing: border-box;
                 margin: 0;
@@ -125,9 +126,48 @@
                 background-color: #007b94;
             }
 
+            /*star rating - opensource codepen from https://codepen.io/jamesbarnett/pen/najzYK*/
+
+            .rating {
+              border: none;
+              float: left;
+            }
+
+            .rating > input { display: none; }
+            .rating > label:before {
+              margin: 5px;
+              font-size: 1.25em;
+              font-family: FontAwesome;
+              display: inline-block;
+              content: "\f005";
+            }
+
+            .rating > .half:before {
+              content: "\f089";
+              position: absolute;
+            }
+
+            .rating > label {
+              color: #ddd;
+             float: right;
+            }
+
+            /***** CSS Magic to Highlight Stars on Hover *****/
+
+            .rating > input:checked ~ label, /* show gold star when clicked */
+            .rating:not(:checked) > label:hover, /* hover current star */
+            .rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+            .rating > input:checked + label:hover, /* hover current star when changing rating */
+            .rating > input:checked ~ label:hover,
+            .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+            .rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
+
 
         </style>
+
     </head>
+
     <body>
         <header>
             <div class="logo">GoogleCrapMap</div>
@@ -161,40 +201,22 @@
                             {% endfor %}
                         </select>
                     </div>
-    
-                    <div class="form-group" style="display:inline-block;">
-                        <div> Rating (1-10):</div>
 
-                        <input type="radio" id="radio1" name="rating" value="1" required>
-                        <label for="radio1">1</label>
-                        <input type="radio" id="radio2" name="rating" value="2" required>
-                        <label for="radio2">2</label>
-                        <input type="radio" id="radio3" name="rating" value="3" required>
-                        <label for="radio3">3</label>
-                        <input type="radio" id="radio4" name="rating" value="4" required>
-                        <label for="radio4">4</label>
-                        <input type="radio" id="radio5" name="rating" value="5" required>
-                        <label for="radio5">5</label>
-                        <input type="radio" id="radio6" name="rating" value="6" required>
-                        <label for="radio6">6</label>
-                        <input type="radio" id="radio7" name="rating" value="7" required>
-                        <label for="radio7">7</label>
-                        <input type="radio" id="radio8" name="rating" value="8" required>
-                        <label for="radio8">8</label>
-                        <input type="radio" id="radio9" name="rating" value="9" required>
-                        <label for="radio9">9</label>
-                        <input type="radio" id="radio10" name="rating" value="10" required>
-                        <label for="radio10">10</label>
-
-
-
-                    </div>
-    
                     <div class="form-group">
+                        <fieldset class="rating">
+                            <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5"></label>
+                            <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4"></label>
+                            <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3"></label>
+                            <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2"></label>
+                            <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1"></label>
+                        </fieldset>
+                    </div>
+
+                    <div class="form-group" style="clear:both">
                         <label for="review">Review:</label>
                         <textarea id="review" name="review" rows="4" cols="50"></textarea>
                     </div>
-    
+
                     <input type="submit" value="Submit Review">
                 </form>
             </div>
