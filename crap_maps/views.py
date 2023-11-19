@@ -9,12 +9,14 @@ def index(request):
 def success(request):
     return render(request, 'success.html')
 
+@login_required
 def map_view(request):
     bathrooms = Bathroom.objects.all()
     reviews = Review.objects.filter(approved_status=True)
     context = {'bathrooms': bathrooms, 'reviews' : reviews}
     return render(request, 'map.html', context)
 
+@login_required
 def review_view(request):
 
     if request.method == 'POST':
