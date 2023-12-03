@@ -129,7 +129,9 @@
             <br>
                 <li class="review-info">
                     Review ID: {{ review.id }}<br>
-                    Bathroom: {{ review.bathroom }}
+                    Bathroom: {{ review.bathroom }} <br>
+                    Rating: {{ review.rating }}/5 stars <br>
+                    Comments: {{ review.comment }}
                     <form action="{% url 'approve_view' %}" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="review_id" value="{{ review.id }}">
