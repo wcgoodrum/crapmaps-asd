@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from .models import Bathroom, Review
 from django.contrib.auth.decorators import user_passes_test, login_required
+from django.conf import settings
 
 def index(request):
     return HttpResponse("Hello, world. You're at the crap_maps index.")
@@ -13,7 +14,7 @@ def success(request):
 def map_view(request):
     bathrooms = Bathroom.objects.all()
     reviews = Review.objects.filter(approved_status=True)
-    context = {'bathrooms': bathrooms, 'reviews' : reviews}
+    context = {'bathrooms': bathrooms, 'reviews' : reviews, 'GOOGLE_MAPS_API_KEY': settings.GOOGLE_MAPS_API_KEY}
     return render(request, 'map.html', context)
 
 @login_required
